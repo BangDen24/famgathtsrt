@@ -157,13 +157,13 @@ export default function RundownPage() {
         </header>
 
         <Section 
-          title="📅 Sabtu, 06 Desember 2025" 
+          title="Sabtu, 06 Desember 2025" 
           data={sabtu} 
           targetDate="2025-12-06"
           checkActive={checkActive} 
         />
         <Section 
-          title="📅 Minggu, 07 Desember 2025" 
+          title="Minggu, 07 Desember 2025" 
           data={minggu} 
           targetDate="2025-12-07"
           checkActive={checkActive} 
