@@ -30,8 +30,10 @@ const Section = ({ title, data, targetDate, checkActive }: SectionProps) => {
   const activeIndex = data.findIndex((item) => checkActive(item.s, item.e, targetDate));
   
   return (
-    <section className="mb-8">
-      <h2 className="text-xl font-bold text-brand-600 mb-4">{title}</h2>
+    <section className="mb-6 sm:mb-8 md:mb-10">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-brand-600 mb-3 sm:mb-4 px-1">
+        {title}
+      </h2>
 
       <Accordion 
         type="single" 
@@ -46,29 +48,35 @@ const Section = ({ title, data, targetDate, checkActive }: SectionProps) => {
             <AccordionItem
               key={i}
               value={`item-${i}`}
-              className={`rounded-xl border transition-all ${
+              className={`rounded-lg sm:rounded-xl border transition-all ${
                 active
                   ? "bg-brand-100 border-brand-400 shadow-md"
                   : "bg-white border-neutral-200"
               }`}
             >
-              <AccordionTrigger className="px-4 hover:no-underline">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="flex-1 text-left">
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="font-semibold text-brand-800">{item.time}</p>
+              <AccordionTrigger className="px-3 sm:px-4 py-3 sm:py-4 hover:no-underline">
+                <div className="flex items-start sm:items-center gap-2 sm:gap-3 w-full">
+                  <div className="flex-1 text-left min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                      <p className="font-semibold text-brand-800 text-sm sm:text-base whitespace-nowrap">
+                        {item.time}
+                      </p>
                       {active && (
-                        <Badge className="bg-green-500 hover:bg-green-600 text-white text-xs">
+                        <Badge className="bg-green-500 hover:bg-green-600 text-white text-[10px] sm:text-xs w-fit">
                           Sedang Berlangsung
                         </Badge>
                       )}
                     </div>
-                    <p className="text-base font-medium">{item.title}</p>
+                    <p className="text-sm sm:text-base font-medium line-clamp-2 pr-2">
+                      {item.title}
+                    </p>
                   </div>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="px-4 pb-4">
-                <p className="text-sm text-neutral-600">{item.detail}</p>
+              <AccordionContent className="px-3 sm:px-4 pb-3 sm:pb-4">
+                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                  {item.detail}
+                </p>
               </AccordionContent>
             </AccordionItem>
           );
@@ -79,24 +87,20 @@ const Section = ({ title, data, targetDate, checkActive }: SectionProps) => {
 };
 
 export default function RundownPage() {
-  // Initialize dengan Date, bukan null
   const [now, setNow] = useState<Date>(new Date());
 
   useEffect(() => {
-    // Jangan set state di sini, langsung ke interval saja
     const interval = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
 
   const checkActive = (start: string, end: string, targetDate: string): boolean => {
-    // targetDate format: "2025-12-06" atau "2025-12-07"
     const target = new Date(targetDate);
     target.setHours(0, 0, 0, 0);
     
     const currentDate = new Date(now);
     currentDate.setHours(0, 0, 0, 0);
     
-    // Cek apakah tanggal sekarang sama dengan target date
     if (currentDate.getTime() !== target.getTime()) {
       return false;
     }
@@ -114,7 +118,7 @@ export default function RundownPage() {
   };
 
   const sabtu: RundownItem[] = [
-    { time: "08.00 – 09.00", s:"08:00", e:"09:00", title: "Kumpul di Office Sedana Karawang", detail: "Sakam / Riko — Persiapan keberangkatan konvoi" },
+    { time: "08.00 – 09.00", s:"08:00", e:"09:00", title: "Kumpul di Office Sedana Karawang", detail: "Persiapan keberangkatan konvoi" },
     { time: "09.00 – 12.00", s:"09:00", e:"12:00", title: "Perjalanan", detail: "Dari Office Sedana ke Rest Area 147A" },
     { time: "12.00 – 12.30", s:"12:00", e:"12:30", title: "Istirahat & Shalat Dzuhur", detail: "Rest Area 147A Padaleunyi" },
     { time: "12.30 – 13.30", s:"12:30", e:"13:30", title: "Perjalanan", detail: "Menuju Hotel Cahaya Garut" },
@@ -136,27 +140,31 @@ export default function RundownPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-brand-50 p-6">
-      {/* Header */}
-      <header className="flex items-center gap-3 mb-6">
-        <Link href="/">
-          <ArrowLeft className="w-6 h-6 text-brand-500" />
-        </Link>
-        <h1 className="text-2xl font-bold text-brand-600">Rundown Acara</h1>
-      </header>
+    <main className="min-h-screen bg-brand-50 px-4 sm:px-6 md:px-8 py-4 sm:py-6">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <header className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 sticky top-0 py-2 sm:py-3 z-10 -mx-4 sm:-mx-6 md:-mx-8 px-4 sm:px-6 md:px-8">
+          <Link href="/" className="flex items-center">
+            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-brand-500 hover:text-brand-600 transition-colors" />
+          </Link>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-600">
+            Rundown Acara
+          </h1>
+        </header>
 
-      <Section 
-        title="Sabtu, 06 Desember 2025" 
-        data={sabtu} 
-        targetDate="2025-12-06"
-        checkActive={checkActive} 
-      />
-      <Section 
-        title="Minggu, 07 Desember 2025" 
-        data={minggu} 
-        targetDate="2025-12-07"
-        checkActive={checkActive} 
-      />
+        <Section 
+          title="Sabtu, 06 Desember 2025" 
+          data={sabtu} 
+          targetDate="2025-12-06"
+          checkActive={checkActive} 
+        />
+        <Section 
+          title="Minggu, 07 Desember 2025" 
+          data={minggu} 
+          targetDate="2025-12-07"
+          checkActive={checkActive} 
+        />
+      </div>
     </main>
   );
 }
