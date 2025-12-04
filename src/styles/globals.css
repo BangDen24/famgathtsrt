@@ -1,50 +1,69 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
-/* BASE LIGHT THEME (default) */
+/* BLUE LIGHT THEME */
 :root {
-  --background: #FFFDF8;
-  --foreground: #2A2A2A;
-
+  /* Backgrounds - Blue tones */
+  --background: #F0F9FF; /* sky-50 */
+  --foreground: #1E3A8A; /* blue-900 */
+  
+  /* Cards */
   --card: #FFFFFF;
-  --card-foreground: #2A2A2A;
-
+  --card-foreground: #1E3A8A;
+  
+  /* Popover */
   --popover: #FFFFFF;
-  --popover-foreground: #2A2A2A;
-
-  --primary: #F6C53A;
-  --primary-foreground: #2A2A2A;
-
-  --secondary: #FFEEC2;
-  --secondary-foreground: #2A2A2A;
-
-  --muted: #F4F1E8;
-  --muted-foreground: #666;
-
-  --accent: #FFF5D7;
-  --accent-foreground: #2A2A2A;
-
-  --destructive: #E14C3F;
+  --popover-foreground: #1E3A8A;
+  
+  /* Primary - Cyan/Blue gradient feel */
+  --primary: #0EA5E9; /* sky-500 */
+  --primary-foreground: #FFFFFF;
+  
+  /* Secondary - Lighter blue */
+  --secondary: #BAE6FD; /* sky-200 */
+  --secondary-foreground: #0C4A6E; /* sky-900 */
+  
+  /* Muted */
+  --muted: #E0F2FE; /* sky-100 */
+  --muted-foreground: #475569; /* slate-600 */
+  
+  /* Accent - Cyan tone */
+  --accent: #A5F3FC; /* cyan-200 */
+  --accent-foreground: #164E63; /* cyan-900 */
+  
+  /* Destructive */
+  --destructive: #DC2626; /* red-600 */
   --destructive-foreground: #FFFFFF;
-
-  --border: #E7E2D9;
-  --input: #E7E2D9;
-  --ring: #F6C53A;
-
-  --radius: 0.625rem;
+  
+  /* Borders & Inputs */
+  --border: #BAE6FD; /* sky-200 */
+  --input: #E0F2FE; /* sky-100 */
+  --ring: #0EA5E9; /* sky-500 */
+  
+  --radius: 0.75rem;
+  
+  /* Custom brand colors for compatibility */
+  --brand-50: #F0F9FF;
+  --brand-100: #E0F2FE;
+  --brand-200: #BAE6FD;
+  --brand-300: #7DD3FC;
+  --brand-400: #38BDF8;
+  --brand-500: #0EA5E9;
+  --brand-600: #0284C7;
+  --brand-700: #0369A1;
+  --brand-800: #075985;
 }
 
-/* HAPUS MODE DARK OTOMATIS */
+/* Lock theme to light mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #FFFDF8;
-    --foreground: #2A2A2A;
+    --background: #F0F9FF;
+    --foreground: #1E3A8A;
   }
 }
 
-/* HAPUS OVERRIDE DARK */
+/* Disable dark mode */
 .dark {}
 
 /* Tailwind mapping */
@@ -54,12 +73,21 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  
+  /* Brand colors for Tailwind */
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
 }
 
 @layer base {
@@ -67,6 +95,22 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Custom animations */
+@layer utilities {
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+    }
+    to {
+      box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+    }
   }
 }

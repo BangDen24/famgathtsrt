@@ -31,15 +31,17 @@ const Section = ({ title, data, targetDate, checkActive }: SectionProps) => {
   
   return (
     <section className="mb-6 sm:mb-8 md:mb-10">
-      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-brand-600 mb-3 sm:mb-4 px-1">
-        {title}
-      </h2>
+      <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl p-4 mb-4 shadow-lg">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
+          {title}
+        </h2>
+      </div>
 
       <Accordion 
         type="single" 
         collapsible 
         defaultValue={activeIndex !== -1 ? `item-${activeIndex}` : undefined}
-        className="space-y-2"
+        className="space-y-3"
       >
         {data.map((item, i) => {
           const active = checkActive(item.s, item.e, targetDate);
@@ -48,35 +50,37 @@ const Section = ({ title, data, targetDate, checkActive }: SectionProps) => {
             <AccordionItem
               key={i}
               value={`item-${i}`}
-              className={`rounded-lg sm:rounded-xl border transition-all ${
+              className={`rounded-lg sm:rounded-xl border-2 transition-all ${
                 active
-                  ? "bg-brand-100 border-brand-400 shadow-md"
-                  : "bg-white border-neutral-200"
+                  ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-400 shadow-lg shadow-green-200/50"
+                  : "bg-white border-blue-200 hover:border-blue-300"
               }`}
             >
               <AccordionTrigger className="px-3 sm:px-4 py-3 sm:py-4 hover:no-underline">
                 <div className="flex items-start sm:items-center gap-2 sm:gap-3 w-full">
                   <div className="flex-1 text-left min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                      <p className="font-semibold text-brand-800 text-sm sm:text-base whitespace-nowrap">
+                      <p className="font-bold text-blue-700 text-sm sm:text-base whitespace-nowrap">
                         {item.time}
                       </p>
                       {active && (
-                        <Badge className="bg-green-500 hover:bg-green-600 text-white text-[10px] sm:text-xs w-fit">
-                          Sedang Berlangsung
+                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white text-[10px] sm:text-xs w-fit shadow-md animate-pulse">
+                          ✨ Sedang Berlangsung
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm sm:text-base font-medium line-clamp-2 pr-2">
+                    <p className="text-sm sm:text-base font-semibold text-gray-800 line-clamp-2 pr-2">
                       {item.title}
                     </p>
                   </div>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="px-3 sm:px-4 pb-3 sm:pb-4">
-                <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                  {item.detail}
-                </p>
+                <div className="bg-blue-50/50 rounded-lg p-3 border border-blue-100">
+                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                    {item.detail}
+                  </p>
+                </div>
               </AccordionContent>
             </AccordionItem>
           );
@@ -140,26 +144,26 @@ export default function RundownPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-brand-50 px-4 sm:px-6 md:px-8 py-4 sm:py-6">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 px-4 sm:px-6 md:px-8 py-4 sm:py-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <header className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 sticky top-0 py-2 sm:py-3 z-10 -mx-4 sm:-mx-6 md:-mx-8 px-4 sm:px-6 md:px-8">
-          <Link href="/" className="flex items-center">
-            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-brand-500 hover:text-brand-600 transition-colors" />
+        <header className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8 sticky top-0 bg-white/80 backdrop-blur-md py-3 sm:py-4 z-10 -mx-4 sm:-mx-6 md:-mx-8 px-4 sm:px-6 md:px-8 shadow-md rounded-b-2xl border-b-2 border-blue-200">
+          <Link href="/" className="flex items-center hover:scale-110 transition-transform">
+            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 hover:text-blue-700" />
           </Link>
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-brand-600">
-            Rundown Acara
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            📋 Rundown Acara
           </h1>
         </header>
 
         <Section 
-          title="Sabtu, 06 Desember 2025" 
+          title="📅 Sabtu, 06 Desember 2025" 
           data={sabtu} 
           targetDate="2025-12-06"
           checkActive={checkActive} 
         />
         <Section 
-          title="Minggu, 07 Desember 2025" 
+          title="📅 Minggu, 07 Desember 2025" 
           data={minggu} 
           targetDate="2025-12-07"
           checkActive={checkActive} 
