@@ -9,7 +9,7 @@ export default function HomePage() {
         {/* Header */}
         <header className="text-center flex flex-col items-center gap-4 sm:gap-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-500 leading-tight px-2">
-            Family Gathering<br className="sm:hidden" /> Taiyo Sinar<br className="sm:hidden" /> ME DIV - DEPT 2 2025
+            Family Gathering<br className="sm:hidden" /> Taiyo Sinar<br className="sm:hidden" /> ME DIV - DEPT-2 Tahun 2025
           </h1>
           
           {/* Responsive Image */}
