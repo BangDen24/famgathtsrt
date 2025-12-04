@@ -1,26 +1,72 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* BASE LIGHT THEME (default) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFDF8;
+  --foreground: #2A2A2A;
+
+  --card: #FFFFFF;
+  --card-foreground: #2A2A2A;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #2A2A2A;
+
+  --primary: #F6C53A;
+  --primary-foreground: #2A2A2A;
+
+  --secondary: #FFEEC2;
+  --secondary-foreground: #2A2A2A;
+
+  --muted: #F4F1E8;
+  --muted-foreground: #666;
+
+  --accent: #FFF5D7;
+  --accent-foreground: #2A2A2A;
+
+  --destructive: #E14C3F;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E7E2D9;
+  --input: #E7E2D9;
+  --ring: #F6C53A;
+
+  --radius: 0.625rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* HAPUS MODE DARK OTOMATIS */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFFDF8;
+    --foreground: #2A2A2A;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* HAPUS OVERRIDE DARK */
+.dark {}
+
+/* Tailwind mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
